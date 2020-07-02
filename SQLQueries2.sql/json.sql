@@ -21,3 +21,40 @@ SELECT
 	info
 FROM
 	orders;
+SELECT
+	info -> 'customer' AS customer
+FROM
+	orders;
+	
+SELECT
+	info ->> 'customer' AS customer
+FROM
+	orders;
+SELECT
+	info -> 'items' ->> 'product' as product
+FROM
+	orders
+ORDER BY
+	product;
+SELECT
+	info ->> 'customer' AS customer
+FROM
+	orders
+WHERE
+	info -> 'items' ->> 'product' = 'Diaper'
+
+SELECT
+	info ->> 'customer' AS customer,
+	info -> 'items' ->> 'product' AS product
+FROM
+	orders
+WHERE
+	CAST (
+		info -> 'items' ->> 'qty' AS INTEGER
+	) = 2;
+SELECT
+	info ->> 'customer' AS customer
+FROM
+	orders
+WHERE
+	info -> 'items' ->> 'product' = 'Diaper';
